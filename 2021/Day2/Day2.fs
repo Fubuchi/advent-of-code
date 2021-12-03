@@ -9,12 +9,9 @@ type Direction =
 
 let parse (text: string) =
     match text.Split [| ' ' |] with
-    | [| d; v |] ->
-        match d with
-        | "forward" -> Forward(v |> int)
-        | "down" -> Down(v |> int)
-        | "up" -> Up(v |> int)
-        | dir -> failwith $"Bad input: {dir}"
+    | [| "forward"; v |] -> Forward(v |> int)
+    | [| "down"; v |] -> Down(v |> int)
+    | [| "up"; v |] -> Up(v |> int)
     | _ -> failwith $"Bad input: {text}"
 
 let dive (hor, dep) curr =
