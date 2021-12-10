@@ -1,5 +1,4 @@
 import scala.io.Source
-import scala.annotation.tailrec
 
 @main def day9 =
     type Point = (Int, Int)
