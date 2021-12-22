@@ -1,6 +1,6 @@
 import scala.annotation.tailrec
 
-@main def Day21 =
+@main def day21 =
     def landing(x: Int) = (x - 1) % 10 + 1
 
     def roll(d: Int) = (d - 1) % 100 + 1
