@@ -2,6 +2,6 @@
 
 https://adventofcode.com/
 
-Implement in F# and Scala 3
+Implement in F#, Scala 3 and Elixir
 
 Maybe more in the future
