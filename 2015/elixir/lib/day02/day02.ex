@@ -9,7 +9,7 @@ defmodule AdventOfCode.Day02 do
     end
   end
 
-  @spec part1(list) :: integer
+  @spec part1(list(String.t())) :: integer
   def part1(input) do
     input
     |> Enum.map(fn s ->
@@ -24,7 +24,7 @@ defmodule AdventOfCode.Day02 do
     |> Enum.sum()
   end
 
-  @spec part2(list) :: integer
+  @spec part2(list(String.t())) :: integer
   def part2(input) do
     input
     |> Enum.map(fn s ->

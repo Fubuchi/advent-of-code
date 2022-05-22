@@ -23,7 +23,7 @@ defmodule AdventOfCode.Day02Test do
     |> IO.puts()
   end
 
-  # @tag :skip
+  @tag :skip
   test "part2", %{input: file} do
     ["2x3x4"]
     |> AdventOfCode.Day02.part2()
