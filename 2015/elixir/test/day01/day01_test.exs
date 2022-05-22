@@ -2,10 +2,10 @@ defmodule AdventOfCode.Day01Test do
   use ExUnit.Case
 
   setup do
-    [input: "test/day1/input.txt"]
+    [input: "test/day01/input.txt"]
   end
 
-  # @tag :skip
+  @tag :skip
   test "part1", %{input: file} do
     "(())"
     |> String.graphemes()
@@ -27,6 +27,7 @@ defmodule AdventOfCode.Day01Test do
     |> IO.puts()
   end
 
+  @tag :skip
   test "part2", %{input: file} do
     ")"
     |> String.graphemes()

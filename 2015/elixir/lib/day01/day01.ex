@@ -1,5 +1,5 @@
 defmodule AdventOfCode.Day01 do
-  @spec part1(list()) :: integer()
+  @spec part1(list) :: integer
   def part1(input) do
     input
     |> Enum.reduce(_floor = 0, fn
@@ -8,7 +8,7 @@ defmodule AdventOfCode.Day01 do
     end)
   end
 
-  @spec part2(list()) :: integer()
+  @spec part2(list) :: integer
   def part2(input) do
     input
     |> Enum.with_index()
