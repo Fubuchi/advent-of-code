@@ -4,14 +4,7 @@ defmodule AdventOfCode.Day03 do
     update_map = fn {houses, {x, y}}, {vx, vy} ->
       nx = x + vx
       ny = y + vy
-
-      houses =
-        case MapSet.member?(houses, {nx, ny}) do
-          false -> MapSet.put(houses, {nx, ny})
-          _ -> houses
-        end
-
-      {houses, {nx, ny}}
+      {MapSet.put(houses, {nx, ny}), {nx, ny}}
     end
 
     input

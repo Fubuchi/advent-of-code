@@ -5,7 +5,6 @@ defmodule AdventOfCode.Day02Test do
     [input: "test/day02/input.txt"]
   end
 
-  @tag :skip
   test "part1", %{input: file} do
     ["2x3x4"]
     |> AdventOfCode.Day02.part1()
@@ -15,15 +14,12 @@ defmodule AdventOfCode.Day02Test do
     |> AdventOfCode.Day02.part1()
     |> (&assert(&1 === 43)).()
 
-    IO.puts("Actual result part 1:")
-
     File.read!(file)
     |> String.split("\n", trim: true)
     |> AdventOfCode.Day02.part1()
-    |> IO.puts()
+    |> (&assert(&1 === 1_598_415)).()
   end
 
-  @tag :skip
   test "part2", %{input: file} do
     ["2x3x4"]
     |> AdventOfCode.Day02.part2()
@@ -33,11 +29,9 @@ defmodule AdventOfCode.Day02Test do
     |> AdventOfCode.Day02.part2()
     |> (&assert(&1 === 14)).()
 
-    IO.puts("Actual result part 2:")
-
     File.read!(file)
     |> String.split("\n", trim: true)
     |> AdventOfCode.Day02.part2()
-    |> IO.puts()
+    |> (&assert(&1 === 3_812_909)).()
   end
 end

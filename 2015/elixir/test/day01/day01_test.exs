@@ -5,7 +5,6 @@ defmodule AdventOfCode.Day01Test do
     [input: "test/day01/input.txt"]
   end
 
-  @tag :skip
   test "part1", %{input: file} do
     "(())"
     |> String.graphemes()
@@ -17,17 +16,14 @@ defmodule AdventOfCode.Day01Test do
     |> AdventOfCode.Day01.part1()
     |> (&assert(&1 === -3)).()
 
-    IO.puts("Actual result part 1:")
-
     File.read!(file)
     |> String.split("\n")
     |> Enum.at(0)
     |> String.graphemes()
     |> AdventOfCode.Day01.part1()
-    |> IO.puts()
+    |> (&assert(&1 == 232)).()
   end
 
-  @tag :skip
   test "part2", %{input: file} do
     ")"
     |> String.graphemes()
@@ -39,13 +35,11 @@ defmodule AdventOfCode.Day01Test do
     |> AdventOfCode.Day01.part2()
     |> (&assert(&1 === 5)).()
 
-    IO.puts("Actual result part 2:")
-
     File.read!(file)
     |> String.split("\n")
     |> Enum.at(0)
     |> String.graphemes()
     |> AdventOfCode.Day01.part2()
-    |> IO.puts()
+    |> (&assert(&1 == 1783)).()
   end
 end
