@@ -1,5 +1,4 @@
 defmodule AdventOfCode.Day03 do
-  @spec moving(list(String.t())) :: MapSet.t({integer, integer})
   defp moving(input) do
     update_map = fn {houses, {x, y}}, {vx, vy} ->
       nx = x + vx

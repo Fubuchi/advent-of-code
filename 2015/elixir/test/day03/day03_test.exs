@@ -5,41 +5,17 @@ defmodule AdventOfCode.Day03Test do
     [input: "test/day03/input.txt"]
   end
 
+  @tag :skip
   test "part1", %{input: file} do
-    "^>v<"
-    |> String.graphemes()
-    |> AdventOfCode.Day03.part1()
-    |> (&assert(&1 === 4)).()
-
-    "^v^v^v^v^v"
-    |> String.graphemes()
-    |> AdventOfCode.Day03.part1()
-    |> (&assert(&1 === 2)).()
-
-    File.read!(file)
-    |> String.split("\n")
-    |> Enum.at(0)
-    |> String.graphemes()
-    |> AdventOfCode.Day03.part1()
-    |> (&assert(&1 === 2081)).()
+    TestHelper.one_line_and_split("^>v<", 4, &AdventOfCode.Day03.part1/1)
+    TestHelper.one_line_and_split("^v^v^v^v^v", 2, &AdventOfCode.Day03.part1/1)
+    TestHelper.one_line_and_split(%{file: file}, 2081, &AdventOfCode.Day03.part1/1)
   end
 
+  @tag :skip
   test "part2", %{input: file} do
-    "^>v<"
-    |> String.graphemes()
-    |> AdventOfCode.Day03.part2()
-    |> (&assert(&1 === 3)).()
-
-    "^v^v^v^v^v"
-    |> String.graphemes()
-    |> AdventOfCode.Day03.part2()
-    |> (&assert(&1 === 11)).()
-
-    File.read!(file)
-    |> String.split("\n")
-    |> Enum.at(0)
-    |> String.graphemes()
-    |> AdventOfCode.Day03.part2()
-    |> (&assert(&1 === 2341)).()
+    TestHelper.one_line_and_split("^>v<", 3, &AdventOfCode.Day03.part2/1)
+    TestHelper.one_line_and_split("^v^v^v^v^v", 11, &AdventOfCode.Day03.part2/1)
+    TestHelper.one_line_and_split(%{file: file}, 2341, &AdventOfCode.Day03.part2/1)
   end
 end
