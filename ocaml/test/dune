@@ -1,0 +1,13 @@
+(include_subdirs unqualified)
+
+(executable
+ (name aoc_solution_test)
+ (libraries alcotest aoc_solution))
+
+(rule
+ (alias runtest)
+ (deps
+  aoc_solution_test.exe
+  (glob_files_rec *.txt))
+ (action
+  (run %{deps} --suite=2015_01)))
