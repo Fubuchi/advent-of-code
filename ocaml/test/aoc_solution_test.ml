@@ -1,6 +1,11 @@
 open Aoc_solution.Share
 
-let suites = StringMap.of_list [ ("2015_01", Y2015_test.Day01_test.suites) ]
+let suites =
+  StringMap.of_list
+    [
+      ("2015_01", Y2015_test.Day01_test.suites);
+      ("2015_02", Y2015_test.Day02_test.suites);
+    ]
 
 let () =
   let chosen_suite =
