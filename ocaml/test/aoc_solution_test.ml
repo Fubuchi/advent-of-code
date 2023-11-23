@@ -5,21 +5,20 @@ let suites =
     [
       ("2015_01", Y2015_test.Day01_test.suites);
       ("2015_02", Y2015_test.Day02_test.suites);
+      ("2015_03", Y2015_test.Day03_test.suites);
     ]
 
 let () =
   let chosen_suite =
     Sys.argv
-    |> Array.to_list
-    |> BatList.drop 1
-    |> List.map (String.split_on_char '=')
-    |> List.find (function
-         | [ "--suite"; _ ] -> true
-         | _ -> false)
-    |> BatList.last
+    |> Array.map (String.split_on_char '=')
+    |> Array.find_map (function
+         | [ "--suite"; v ] -> Some v
+         | _ -> None)
+    |> Option.get
   in
 
   suites
   |> StringMap.find chosen_suite
   |> fun suite ->
-  [ (chosen_suite, suite) ] |> Alcotest.run chosen_suite ~argv:[| "_,"; "-q" |]
+  [ (chosen_suite, suite) ] |> Alcotest.run chosen_suite ~argv:[| "_"; "-q" |]

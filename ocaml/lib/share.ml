@@ -1,7 +1,21 @@
 module StringMap = BatMap.Make (String)
 
+module Point = struct
+  type t = int * int
+
+  let compare = compare
+end
+
+module PointSet = Set.Make (Point)
+
 let ( << ) f g x = f (g x)
 let ( >> ) f g x = g (f x)
+let ( <| ) f x = f x
+let ( ||> ) f (x, y) = f x y
+
+let tap f x =
+  let () = f x in
+  x
 
 let unreachable a =
   BatPervasives.dump a
