@@ -6,6 +6,7 @@ let suites =
       ("2015_01", Y2015_test.Day01_test.suites);
       ("2015_02", Y2015_test.Day02_test.suites);
       ("2015_03", Y2015_test.Day03_test.suites);
+      ("2015_04", Y2015_test.Day04_test.suites);
     ]
 
 let () =

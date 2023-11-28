@@ -10,4 +10,4 @@
   aoc_solution_test.exe
   (glob_files_rec *.txt))
  (action
-  (run %{deps} --suite=2015_03)))
+  (run %{deps} --suite=2015_04)))
