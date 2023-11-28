@@ -11,7 +11,7 @@ let parse_type = function
   | '>' -> East
   | 'v' -> South
   | '<' -> West
-  | e -> unreachable e
+  | e -> unreachable Fmt.char e
 
 let parse_input input = input |> String.to_seq |> Seq.map parse_type
 

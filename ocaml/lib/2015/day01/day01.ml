@@ -8,7 +8,7 @@ let part_one instructions =
          match ins with
          | '(' -> floor + 1
          | ')' -> floor - 1
-         | c -> unreachable c)
+         | c -> unreachable Fmt.char c)
        0
 
 let part_two instructions =
@@ -22,7 +22,7 @@ let part_two instructions =
            match ins with
            | '(' -> (floor + 1, i)
            | ')' -> (floor - 1, i)
-           | c -> unreachable c)
+           | c -> unreachable Fmt.char c)
        (0, 0)
   |> snd
   |> ( + ) 1

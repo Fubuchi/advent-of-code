@@ -13,12 +13,12 @@ let part_one sizes =
          |> combnk 2
          |> List.map (function
               | [ x; y ] -> x * y
-              | u -> unreachable u)
+              | u -> unreachable Fmt.(Dump.list int) u)
          |> List.sort compare
          |> function
          | smallest :: _ as areas ->
              smallest + (areas |> List.fold_left ( + ) 0 |> ( * ) 2)
-         | u -> unreachable u)
+         | u -> unreachable Fmt.(Dump.list int) u)
   |> List.fold_left ( + ) 0
 
 let part_two sizes =
@@ -27,5 +27,5 @@ let part_two sizes =
   |> List.map (List.sort compare)
   |> List.map (function
        | [ x; y; z ] -> (2 * (x + y)) + (x * y * z)
-       | u -> unreachable u)
+       | u -> unreachable Fmt.(Dump.list int) u)
   |> List.fold_left ( + ) 0
