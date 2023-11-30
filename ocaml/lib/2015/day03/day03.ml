@@ -1,4 +1,5 @@
-open Share
+open Share.Func
+open Share.Data
 
 type direction =
   | North

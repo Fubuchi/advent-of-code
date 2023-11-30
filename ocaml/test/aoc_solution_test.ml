@@ -1,4 +1,4 @@
-open Aoc_solution.Share
+open Aoc_solution.Share.Data
 
 let suites =
   StringMap.of_list

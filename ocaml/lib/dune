@@ -3,4 +3,4 @@
 (library
  (name aoc_solution)
  (public_name aoc_solution)
- (libraries batteries fmt))
+ (libraries containers fmt))

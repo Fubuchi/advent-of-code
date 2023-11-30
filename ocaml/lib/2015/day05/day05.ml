@@ -1,4 +1,6 @@
-open Share
+open Containers
+open Share.Func
+open Share.Operator
 
 let vowels = [ 'a'; 'e'; 'i'; 'o'; 'u' ]
 let bad_pairs = [ [ 'a'; 'b' ]; [ 'c'; 'd' ]; [ 'p'; 'q' ]; [ 'x'; 'y' ] ]
@@ -6,10 +8,10 @@ let bad_pairs = [ [ 'a'; 'b' ]; [ 'c'; 'd' ]; [ 'p'; 'q' ]; [ 'x'; 'y' ] ]
 let part_one input =
   input
   |> List.map (String.to_seq >> List.of_seq >> windowed 2 1)
-  |> BatList.count_matching (fun line ->
+  |> List.count (fun line ->
          let three_vowels =
            line
-           |> BatList.count_matching (function
+           |> List.count (function
                 | c :: _ -> List.mem c vowels
                 | _ -> false)
            |> Fun.flip ( >= ) 3
@@ -38,7 +40,7 @@ let part_two input =
 
   input
   |> List.map (String.to_seq >> List.of_seq)
-  |> BatList.count_matching (fun line ->
+  |> List.count (fun line ->
          let double_pair = line |> windowed 2 1 ~discard:true |> double_pair in
          let uwu =
            line

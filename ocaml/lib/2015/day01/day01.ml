@@ -1,4 +1,4 @@
-open Share
+open Share.Func
 
 let part_one instructions =
   instructions
