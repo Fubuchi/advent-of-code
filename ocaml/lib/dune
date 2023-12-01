@@ -1,6 +1,6 @@
-(include_subdirs unqualified)
+(include_subdirs qualified)
 
 (library
  (name aoc_solution)
  (public_name aoc_solution)
- (libraries containers fmt))
+ (libraries containers fmt pcre))

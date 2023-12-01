@@ -1,5 +1,11 @@
 open Containers
 
+module Printer = struct
+  let string = Fmt.string
+  let arr t = Fmt.(Dump.array t)
+  let lst t = Fmt.(Dump.list t)
+end
+
 module Data = struct
   module StringMap = Map.Make (String)
   module CharSet = Set.Make (Char)

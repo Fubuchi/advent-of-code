@@ -11,7 +11,7 @@ let static_suites =
   ]
 
 let file_suites =
-  Arg.read_arg "./2015/day02/input.txt"
+  Arg.read_arg "./y2015_test/day02_test/input.txt"
   |> Array.to_list
   |> fun input ->
   [

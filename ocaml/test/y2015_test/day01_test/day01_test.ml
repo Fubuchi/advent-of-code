@@ -12,7 +12,7 @@ let static_suites =
   ]
 
 let file_suites =
-  Arg.read_arg "./2015/day01/input.txt"
+  Arg.read_arg "./y2015_test/day01_test/input.txt"
   |> fun args ->
   args.(0)
   |> fun input ->
