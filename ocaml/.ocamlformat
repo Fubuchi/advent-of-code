@@ -11,3 +11,4 @@ break-infix-before-func = true
 if-then-else = k-r
 parens-tuple-patterns = always
 match-indent-nested = always
+m = 100

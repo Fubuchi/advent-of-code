@@ -2,10 +2,7 @@ open Containers
 open Share.Func
 module P = Share.Printer
 
-let re_main =
-  Pcre.regexp
-    "(?=(one|two|three|four|five|six|seven|eight|nine|1|2|3|4|5|6|7|8|9))\\w|\\d"
-
+let re_main = Pcre.regexp "(?=(one|two|three|four|five|six|seven|eight|nine|1|2|3|4|5|6|7|8|9))\\w|\\d"
 let re_digit = Pcre.regexp "[0-9]"
 
 let to_int = function

@@ -2,8 +2,10 @@ open Containers
 
 module Printer = struct
   let string = Fmt.string
+  let int = Fmt.int
   let arr t = Fmt.(Dump.array t)
   let lst t = Fmt.(Dump.list t)
+  let tup2 l r = Fmt.(pair l r)
 end
 
 module Data = struct
@@ -32,8 +34,11 @@ module Func = struct
     f x;
     x
 
-  let unreachable printer a =
-    Fmt.failwith "Branch value is unreachable: %a" printer a
+  let opt_get = function
+    | Some v -> v
+    | _ -> failwith "Empty value!"
+
+  let unreachable printer a = Fmt.failwith "Branch value is unreachable: %a" printer a
 
   let rec combnk k lst =
     if k = 0 then
