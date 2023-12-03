@@ -3,6 +3,7 @@ open Containers
 module Printer = struct
   let string = Fmt.string
   let int = Fmt.int
+  let char = Fmt.char
   let arr t = Fmt.(Dump.array t)
   let lst t = Fmt.(Dump.list t)
   let tup2 l r = Fmt.(pair l r)
@@ -18,7 +19,18 @@ module Data = struct
     let compare = Stdlib.compare
   end
 
+  module Point2 = struct
+    type t = (int * int) * (int * int)
+
+    let compare = Stdlib.compare
+  end
+
   module PointSet = Set.Make (Point)
+  module PointMap = Map.Make (Point)
+  module Point2Set = Set.Make (Point2)
+  module Point2Map = Map.Make (Point2)
+
+  let move_vectors = [ (-1, 1); (0, 1); (1, 1); (-1, 0); (1, 0); (-1, -1); (0, -1); (1, -1) ]
 end
 
 module Operator = struct
@@ -37,6 +49,10 @@ module Func = struct
   let opt_get = function
     | Some v -> v
     | _ -> failwith "Empty value!"
+
+  let is_digit = function
+    | '0' .. '9' -> true
+    | _ -> false
 
   let unreachable printer a = Fmt.failwith "Branch value is unreachable: %a" printer a
 
