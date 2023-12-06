@@ -11,6 +11,14 @@ let suites_2015 =
   ]
 
 let suites_2023 =
-  [ ("2023_01", Y2023_test.Day01_test.suites); ("2023_02", Y2023_test.Day02_test.suites) ]
+  [
+    ("2023_01", Y2023_test.Day01_test.suites);
+    ("2023_02", Y2023_test.Day02_test.suites);
+    ("2023_03", Y2023_test.Day03_test.suites);
+    ("2023_04", Y2023_test.Day04_test.suites);
+    ("2023_05", Y2023_test.Day05_test.suites);
+    ("2023_06", Y2023_test.Day06_test.suites);
+  ]
 
-let suites = StringMap.of_list suites_2015 |> Fun.flip StringMap.add_list suites_2023
+let suites =
+  StringMap.of_list suites_2015 |> Fun.flip StringMap.add_list suites_2023

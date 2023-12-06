@@ -22,12 +22,13 @@ let static_suites =
   ]
 
 let file_suites =
-  Arg.read_arg "./y2023_test/day01_test/input.txt"
-  |> Array.to_list
-  |> fun input ->
-  [
-    ("Expect = 56465", `Quick, test int part_one input 56465);
-    ("Expect = 55902", `Quick, test int part_two input 55902);
-  ]
+  read_file_suite "2023_01" (fun () ->
+      Arg.read_arg "./y2023_test/day01_test/input.txt"
+      |> Array.to_list
+      |> fun input ->
+      [
+        ("Expect = 56465", `Quick, test int part_one input 56465);
+        ("Expect = 55902", `Quick, test int part_two input 55902);
+      ])
 
 let suites = static_suites @ file_suites

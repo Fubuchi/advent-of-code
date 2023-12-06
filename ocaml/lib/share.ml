@@ -4,33 +4,48 @@ module Printer = struct
   let string = Fmt.string
   let int = Fmt.int
   let char = Fmt.char
-  let arr t = Fmt.(Dump.array t)
-  let lst t = Fmt.(Dump.list t)
-  let tup2 l r = Fmt.(pair l r)
+  let arr t = Fmt.Dump.array t
+  let lst t = Fmt.Dump.list t
+  let pair l r = Fmt.pair l r
+
+  let triple pp_fst pp_snd pp_third =
+    let fst (a, _, _) = a in
+    let snd (_, b, _) = b in
+    let thrd (_, _, c) = c in
+    Fmt.(
+      parens
+        (using fst (box pp_fst)
+        ++ comma
+        ++ using snd (box pp_snd)
+        ++ comma
+        ++ using thrd (box pp_third)))
 end
 
 module Data = struct
   module StringMap = Map.Make (String)
   module CharSet = Set.Make (Char)
 
-  module Point = struct
+  module Int2 = struct
     type t = int * int
 
     let compare = Stdlib.compare
   end
 
-  module Point2 = struct
-    type t = (int * int) * (int * int)
+  module Int3 = struct
+    type t = int * int * int
 
     let compare = Stdlib.compare
   end
 
-  module PointSet = Set.Make (Point)
-  module PointMap = Map.Make (Point)
-  module Point2Set = Set.Make (Point2)
-  module Point2Map = Map.Make (Point2)
+  module IntSet = Set.Make (Int)
+  module IntMap = Map.Make (Int)
+  module Int2Set = Set.Make (Int2)
+  module Int2Map = Map.Make (Int2)
+  module Int3Set = Set.Make (Int3)
+  module Int3Map = Map.Make (Int3)
 
-  let move_vectors = [ (-1, 1); (0, 1); (1, 1); (-1, 0); (1, 0); (-1, -1); (0, -1); (1, -1) ]
+  let move_vectors =
+    [ (-1, 1); (0, 1); (1, 1); (-1, 0); (1, 0); (-1, -1); (0, -1); (1, -1) ]
 end
 
 module Operator = struct
@@ -38,6 +53,7 @@ module Operator = struct
   let ( >> ) f g x = g (f x)
   let ( <| ) f x = f x
   let ( ||> ) (x, y) f = f x y
+  let ( |||> ) (x, y, z) f = f x y z
   let ( = ) = Stdlib.( = )
 end
 
@@ -54,7 +70,12 @@ module Func = struct
     | '0' .. '9' -> true
     | _ -> false
 
-  let unreachable printer a = Fmt.failwith "Branch value is unreachable: %a" printer a
+  let pair_of_list = function
+    | [ x; y ] -> (x, y)
+    | e -> Fmt.failwith "Invalid list lenght %d" (List.length e)
+
+  let unreachable printer a =
+    Fmt.failwith "Branch value is unreachable: %a" printer a
 
   let rec combnk k lst =
     if k = 0 then
@@ -80,4 +101,7 @@ module Func = struct
     in
 
     windowed_internal lst [] |> List.rev
+
+  let range first last =
+    Seq.iterate (( + ) 1) first |> Seq.take (last - first + 1)
 end

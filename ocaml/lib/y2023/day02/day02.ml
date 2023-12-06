@@ -18,7 +18,8 @@ let parse_game input =
   input
   |> List.mapi (fun i raw ->
          raw
-         |> (Pcre.replace_first ~pat:"Game \\d+: " ~templ:"" >> Pcre.split ~pat:"; |, ")
+         |> (Pcre.replace_first ~pat:"Game \\d+: " ~templ:""
+            >> Pcre.split ~pat:"; |, ")
          |> List.map (String.split ~by:" ")
          |> List.map (function
               | [ count; dice ] -> (dice, Int.of_string_exn count)
@@ -26,10 +27,13 @@ let parse_game input =
          |> List.fold_left
               (fun game pull ->
                 match pull with
-                | ("red", count) -> { game with red = update_dice count game.red }
-                | ("blue", count) -> { game with blue = update_dice count game.blue }
-                | ("green", count) -> { game with green = update_dice count game.green }
-                | e -> unreachable P.(tup2 string int) e)
+                | ("red", count) ->
+                    { game with red = update_dice count game.red }
+                | ("blue", count) ->
+                    { game with blue = update_dice count game.blue }
+                | ("green", count) ->
+                    { game with green = update_dice count game.green }
+                | e -> unreachable P.(pair string int) e)
               { id = i + 1; red = None; blue = None; green = None })
 
 let part_one input =
@@ -59,6 +63,8 @@ let part_two input =
   |> parse_game
   |> List.fold_left
        (fun total game ->
-         let (r, b, g) = (opt_get game.red, opt_get game.blue, opt_get game.green) in
+         let (r, b, g) =
+           (opt_get game.red, opt_get game.blue, opt_get game.green)
+         in
          total + (r * b * g))
        0

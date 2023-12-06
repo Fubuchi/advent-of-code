@@ -3,4 +3,4 @@
 (library
  (name aoc_solution)
  (public_name aoc_solution)
- (libraries containers fmt pcre))
+ (libraries containers fmt pcre iter))

@@ -1,3 +1,4 @@
+open Aoc_solution.Share.Func
 open Aoc_solution.Share.Data
 
 let () =
@@ -7,10 +8,11 @@ let () =
     |> Array.find_map (function
          | [ "--suite"; v ] -> Some v
          | _ -> None)
-    |> Option.get
+    |> opt_get
   in
 
-  Suite.suites
-  |> StringMap.find chosen_suite
-  |> fun suite ->
-  [ (chosen_suite, suite) ] |> Alcotest.run chosen_suite ~argv:[| "_"; "-q" |]
+  (match chosen_suite with
+  | "all" -> StringMap.bindings Suite.suites
+  | suite -> [ (suite, StringMap.find suite Suite.suites) ])
+  |> List.iter (fun (suite_name, suites) ->
+         Alcotest.run suite_name ~argv:[| "_"; "-q" |] [ (suite_name, suites) ])

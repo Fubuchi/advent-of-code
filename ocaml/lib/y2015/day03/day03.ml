@@ -24,17 +24,17 @@ let move (x, y) = function
 
 let update_houses (houses, pos) dir =
   let next = move pos dir in
-  if PointSet.mem next houses then
+  if Int2Set.mem next houses then
     (houses, next)
   else
-    (PointSet.add next houses, next)
+    (Int2Set.add next houses, next)
 
 let part_one input =
   input
   |> parse_input
-  |> Seq.fold_left update_houses (PointSet.singleton (0, 0), (0, 0))
+  |> Seq.fold_left update_houses (Int2Set.singleton (0, 0), (0, 0))
   |> fst
-  |> PointSet.cardinal
+  |> Int2Set.cardinal
 
 let part_two input =
   input
@@ -47,6 +47,6 @@ let part_two input =
          else
            let (houses, robo_pos) = update_houses (houses, robo_pos) dir in
            (houses, santa_pos, robo_pos))
-       (PointSet.singleton (0, 0), (0, 0), (0, 0))
+       (Int2Set.singleton (0, 0), (0, 0), (0, 0))
   |> (fun (houses, _, _) -> houses)
-  |> PointSet.cardinal
+  |> Int2Set.cardinal
