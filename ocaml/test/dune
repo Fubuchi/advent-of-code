@@ -7,7 +7,8 @@
 (rule
  (alias runtest)
  (deps
+  (universe)
   aoc_solution_test.exe
   (glob_files_rec *.txt))
  (action
-  (run %{deps} --suite=2023_06)))
+  (run %{deps} --suite=2023_08)))

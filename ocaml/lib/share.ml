@@ -1,24 +1,22 @@
 open Containers
 
 module Printer = struct
-  let string = Fmt.string
-  let int = Fmt.int
-  let char = Fmt.char
+  include Fmt
+
   let arr t = Fmt.Dump.array t
   let lst t = Fmt.Dump.list t
-  let pair l r = Fmt.pair l r
+  let pair l r = Fmt.pair l r ~sep:Fmt.comma
 
   let triple pp_fst pp_snd pp_third =
     let fst (a, _, _) = a in
     let snd (_, b, _) = b in
     let thrd (_, _, c) = c in
-    Fmt.(
-      parens
-        (using fst (box pp_fst)
-        ++ comma
-        ++ using snd (box pp_snd)
-        ++ comma
-        ++ using thrd (box pp_third)))
+    parens
+      (using fst (box pp_fst)
+      ++ comma
+      ++ using snd (box pp_snd)
+      ++ comma
+      ++ using thrd (box pp_third))
 end
 
 module Data = struct
@@ -104,4 +102,22 @@ module Func = struct
 
   let range first last =
     Seq.iterate (( + ) 1) first |> Seq.take (last - first + 1)
+
+  let rec compare_list ?(cmp = Stdlib.compare) l1 l2 =
+    match (l1, l2) with
+    | ([], []) -> 0
+    | ([], _) -> -1
+    | (_, []) -> 1
+    | (h :: t, hh :: tt) -> (
+        match cmp h hh with
+        | 0 -> compare_list ~cmp t tt
+        | c -> c)
+
+  let rec gcd a b =
+    if a = b then
+      a
+    else
+      gcd (min a b) (a |> ( - ) b |> abs)
+
+  let lcm a b = a * b / gcd a b
 end

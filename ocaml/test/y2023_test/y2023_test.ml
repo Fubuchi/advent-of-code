@@ -4,3 +4,5 @@ module Day03_test = Day03_test
 module Day04_test = Day04_test
 module Day05_test = Day05_test
 module Day06_test = Day06_test
+module Day07_test = Day07_test
+module Day08_test = Day08_test
