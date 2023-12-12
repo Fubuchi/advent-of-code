@@ -34,9 +34,9 @@ let input_3 =
 
 let static_suites =
   [
-    ("Expect: 2", `Quick, test int part_one input_1 2);
-    ("Expect: 6", `Quick, test int part_one input_2 6);
-    ("Expect: 6", `Quick, test int part_two input_3 6);
+    ("Expect: 2", `Quick, test int (fun () -> part_one input_1) 2);
+    ("Expect: 6", `Quick, test int (fun () -> part_one input_2) 6);
+    ("Expect: 6", `Quick, test int (fun () -> part_two input_3) 6);
   ]
 
 let file_suites =
@@ -45,10 +45,10 @@ let file_suites =
       |> Array.to_list
       |> fun input ->
       [
-        ("Expect = 15989", `Quick, test int part_one input 15989);
+        ("Expect = 15989", `Quick, test int (fun () -> part_one input) 15989);
         ( "Expect = 13830919117339",
           `Quick,
-          test int part_two input 13830919117339 );
+          test int (fun () -> part_two input) 13830919117339 );
       ])
 
 let suites = static_suites @ file_suites

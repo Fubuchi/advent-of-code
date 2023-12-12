@@ -36,7 +36,7 @@ let parse input =
        (Int3Map.empty, Int2Map.empty)
 
 let nearby_of_number (fst, lst, row) =
-  move_vectors
+  move_vectors_8
   |> List.flat_map (fun (vx, vy) ->
          range fst lst
          |> Seq.map (fun x -> (x + vx, row + vy))

@@ -6,3 +6,7 @@ module Day05_test = Day05_test
 module Day06_test = Day06_test
 module Day07_test = Day07_test
 module Day08_test = Day08_test
+module Day09_test = Day09_test
+module Day10_test = Day10_test
+module Day11_test = Day11_test
+module Day12_test = Day12_test

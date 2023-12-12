@@ -24,7 +24,7 @@ module Data = struct
   module CharSet = Set.Make (Char)
 
   module Int2 = struct
-    type t = int * int
+    type t = int * int [@@deriving show]
 
     let compare = Stdlib.compare
   end
@@ -42,8 +42,10 @@ module Data = struct
   module Int3Set = Set.Make (Int3)
   module Int3Map = Map.Make (Int3)
 
-  let move_vectors =
+  let move_vectors_8 =
     [ (-1, 1); (0, 1); (1, 1); (-1, 0); (1, 0); (-1, -1); (0, -1); (1, -1) ]
+
+  let move_vector_4 = [ (-1, 0); (0, 1); (1, 0); (0, -1) ]
 end
 
 module Operator = struct
@@ -56,6 +58,17 @@ module Operator = struct
 end
 
 module Func = struct
+  let memo_rec f =
+    let h = Hashtbl.create 16 in
+    let rec g x =
+      try Hashtbl.find h x
+      with Not_found ->
+        let y = f g x in
+        Hashtbl.add h x y;
+        y
+    in
+    g
+
   let tap f x =
     f x;
     x
@@ -100,8 +113,8 @@ module Func = struct
 
     windowed_internal lst [] |> List.rev
 
-  let range first last =
-    Seq.iterate (( + ) 1) first |> Seq.take (last - first + 1)
+  let range first last ?(step = 1) =
+    Seq.iterate (( + ) step) first |> Seq.take (abs (last - first) + 1)
 
   let rec compare_list ?(cmp = Stdlib.compare) l1 l2 =
     match (l1, l2) with

@@ -3,4 +3,6 @@
 (library
  (name aoc_solution)
  (public_name aoc_solution)
- (libraries containers fmt pcre iter))
+ (preprocess
+  (pps ppx_deriving.show))
+ (libraries containers fmt pcre iter lru))

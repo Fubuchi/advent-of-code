@@ -18,8 +18,8 @@ let static =
 
 let static_suites =
   [
-    ("Expect: 4361", `Quick, test int part_one static 4361);
-    ("Expect: 467835", `Quick, test int part_two static 467835);
+    ("Expect: 4361", `Quick, test int (fun () -> part_one static) 4361);
+    ("Expect: 467835", `Quick, test int (fun () -> part_two static) 467835);
   ]
 
 let file_suites =
@@ -28,8 +28,10 @@ let file_suites =
       |> Array.to_list
       |> fun input ->
       [
-        ("Expect = 527369", `Quick, test int part_one input 527369);
-        ("Expect = 73074886", `Quick, test int part_two input 73074886);
+        ("Expect = 527369", `Quick, test int (fun () -> part_one input) 527369);
+        ( "Expect = 73074886",
+          `Quick,
+          test int (fun () -> part_two input) 73074886 );
       ])
 
 let suites = static_suites @ file_suites
