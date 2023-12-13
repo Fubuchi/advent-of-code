@@ -10,3 +10,4 @@ module Day09_test = Day09_test
 module Day10_test = Day10_test
 module Day11_test = Day11_test
 module Day12_test = Day12_test
+module Day13_test = Day13_test

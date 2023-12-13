@@ -3,17 +3,8 @@ open Share.Data
 open Share.Func
 
 let parse input =
-  let max_x = input |> List.hd |> String.length |> Fun.flip ( - ) 1 in
-  let min_y = input |> List.length |> ( - ) 1 in
-  let universal =
-    input
-    |> List.foldi
-         (fun map y line ->
-           line
-           |> String.to_list
-           |> List.foldi (fun m x c -> Int2Map.add (x, -y) c m) map)
-         Int2Map.empty
-  in
+  let (max_x, min_y) = maxx_miny input in
+  let universal = parse_grid input in
 
   let seq_x = range 0 max_x in
   let seq_y = range 0 ~step:(-1) min_y in

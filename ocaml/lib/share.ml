@@ -58,6 +58,8 @@ module Operator = struct
 end
 
 module Func = struct
+  open Data
+
   let memo_rec f =
     let h = Hashtbl.create 16 in
     let rec g x =
@@ -84,6 +86,20 @@ module Func = struct
   let pair_of_list = function
     | [ x; y ] -> (x, y)
     | e -> Fmt.failwith "Invalid list lenght %d" (List.length e)
+
+  let parse_grid input =
+    input
+    |> List.foldi
+         (fun map y line ->
+           line
+           |> String.to_list
+           |> List.foldi (fun m x c -> Int2Map.add (x, -y) c m) map)
+         Int2Map.empty
+
+  let maxx_miny input =
+    let max_x = input |> List.hd |> String.length |> Fun.flip ( - ) 1 in
+    let min_y = input |> List.length |> ( - ) 1 in
+    (max_x, min_y)
 
   let unreachable printer a =
     Fmt.failwith "Branch value is unreachable: %a" printer a
