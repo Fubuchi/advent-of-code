@@ -20,6 +20,13 @@ module Printer = struct
 end
 
 module Data = struct
+  type diection =
+    | N
+    | W
+    | E
+    | S
+  [@@deriving show]
+
   module StringMap = Map.Make (String)
   module CharSet = Set.Make (Char)
 
@@ -35,12 +42,19 @@ module Data = struct
     let compare = Stdlib.compare
   end
 
+  module Int4 = struct
+    type t = int * int * int * int
+
+    let compare = Stdlib.compare
+  end
+
   module IntSet = Set.Make (Int)
   module IntMap = Map.Make (Int)
   module Int2Set = Set.Make (Int2)
   module Int2Map = Map.Make (Int2)
   module Int3Set = Set.Make (Int3)
   module Int3Map = Map.Make (Int3)
+  module Int4Map = Map.Make (Int4)
 
   let move_vectors_8 =
     [ (-1, 1); (0, 1); (1, 1); (-1, 0); (1, 0); (-1, -1); (0, -1); (1, -1) ]
@@ -87,13 +101,13 @@ module Func = struct
     | [ x; y ] -> (x, y)
     | e -> Fmt.failwith "Invalid list lenght %d" (List.length e)
 
-  let parse_grid input =
+  let parse_grid ~fvalue input =
     input
     |> List.foldi
          (fun map y line ->
            line
            |> String.to_list
-           |> List.foldi (fun m x c -> Int2Map.add (x, -y) c m) map)
+           |> List.foldi (fun m x v -> Int2Map.add (x, -y) (fvalue v) m) map)
          Int2Map.empty
 
   let maxx_miny input =
@@ -142,6 +156,12 @@ module Func = struct
         | 0 -> compare_list ~cmp t tt
         | c -> c)
 
+  let move_to_dir (x, y) = function
+    | N -> (x, y + 1)
+    | S -> (x, y - 1)
+    | E -> (x + 1, y)
+    | W -> (x - 1, y)
+
   let rec gcd a b =
     if a = b then
       a
@@ -149,4 +169,40 @@ module Func = struct
       gcd (min a b) (a |> ( - ) b |> abs)
 
   let lcm a b = a * b / gcd a b
+end
+
+module Ext = struct
+  module List = struct
+    include List
+
+    let remove_if f lst =
+      let rec remove_if' aux = function
+        | [] -> List.rev aux
+        | x :: xs ->
+            if f x then
+              remove_if' aux xs
+            else
+              remove_if' (x :: aux) xs
+      in
+      remove_if' [] lst
+
+    let update_if ~eq ~map lst =
+      let rec update_if' aux = function
+        | [] -> List.rev aux
+        | x :: xs ->
+            if eq x then
+              update_if' (map x :: aux) xs
+            else
+              update_if' (x :: aux) xs
+      in
+      update_if' [] lst
+  end
+
+  module Char = struct
+    include Char
+
+    let to_digit_exn = function
+      | c when Func.is_digit c -> code c - code '0'
+      | c -> Printer.failwith "Invalid value: %c" c
+  end
 end

@@ -2,6 +2,7 @@ open Containers
 open Share.Data
 open Share.Func
 
+let parse_grid = parse_grid ~fvalue:Fun.id
 let slice lst = lst |> windowed 2 1 ~discard:true |> List.map pair_of_list
 
 let check_mirror map (a1, a2) lst ~max_diff ~exit ~to_point ~next =

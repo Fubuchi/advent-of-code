@@ -16,10 +16,10 @@ let file_suites =
       |> Array.to_list
       |> fun input ->
       [
-        ( "Expect:250254244",
+        ( "Expect: 250254244",
           `Quick,
           test int (fun () -> part_one input) 250254244 );
-        ( "Expect:250087440",
+        ( "Expect: 250087440",
           `Quick,
           test int (fun () -> part_two input) 250087440 );
       ])

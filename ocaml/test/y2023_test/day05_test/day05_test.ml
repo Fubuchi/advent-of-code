@@ -51,10 +51,12 @@ let file_suites =
       |> Array.to_list
       |> fun input ->
       [
-        ( "Expect:836040384",
+        ( "Expect: 836040384",
           `Quick,
           test int (fun () -> part_one input) 836040384 );
-        ("Expect:10834440", `Quick, test int (fun () -> part_two input) 10834440);
+        ( "Expect: 10834440",
+          `Quick,
+          test int (fun () -> part_two input) 10834440 );
       ])
 
 let suites = static_suites @ file_suites

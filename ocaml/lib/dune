@@ -5,4 +5,4 @@
  (public_name aoc_solution)
  (preprocess
   (pps ppx_deriving.show))
- (libraries containers fmt pcre iter lru))
+ (libraries containers fmt pcre iter psq))

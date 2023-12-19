@@ -4,13 +4,6 @@ open Share.Func
 open Share.Operator
 module P = Share.Printer
 
-type diection =
-  | N
-  | W
-  | E
-  | S
-[@@deriving show]
-
 let to_south = ((0, -1), N)
 let to_west = ((-1, 0), E)
 let to_east = ((1, 0), W)

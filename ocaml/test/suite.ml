@@ -25,6 +25,11 @@ let suites_2023 =
     ("2023_11", Y2023_test.Day11_test.suites);
     ("2023_12", Y2023_test.Day12_test.suites);
     ("2023_13", Y2023_test.Day13_test.suites);
+    ("2023_14", Y2023_test.Day14_test.suites);
+    ("2023_15", Y2023_test.Day15_test.suites);
+    ("2023_16", Y2023_test.Day16_test.suites);
+    ("2023_17", Y2023_test.Day17_test.suites);
+    ("2023_18", Y2023_test.Day18_test.suites);
   ]
 
 let suites =

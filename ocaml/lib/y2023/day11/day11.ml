@@ -2,6 +2,8 @@ open Containers
 open Share.Data
 open Share.Func
 
+let parse_grid = parse_grid ~fvalue:Fun.id
+
 let parse input =
   let (max_x, min_y) = maxx_miny input in
   let universal = parse_grid input in

@@ -45,8 +45,8 @@ let file_suites =
       |> Array.to_list
       |> fun input ->
       [
-        ("Expect:15989", `Quick, test int (fun () -> part_one input) 15989);
-        ( "Expect:13830919117339",
+        ("Expect: 15989", `Quick, test int (fun () -> part_one input) 15989);
+        ( "Expect: 13830919117339",
           `Quick,
           test int (fun () -> part_two input) 13830919117339 );
       ])
